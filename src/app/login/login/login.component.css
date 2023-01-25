@@ -1,0 +1,84 @@
+.body-login {
+    background-image: linear-gradient(90deg, #004561, #0097c0);
+    height: 100%;
+    width: 100%;
+}
+
+.size-card {
+    width: 350px;
+    max-height: 100%x;
+}
+
+.tamaño {
+    font: 10px/16px Verdana;
+    padding: 0;
+}
+
+.labels input::placeholder {
+    font: 10px/16px Verdana;
+    padding: 0;
+    color: silver;
+}
+
+.recuerdame {
+    font: 13px/16px Verdana;
+    padding: 0;
+    color: silver;
+}
+
+.labels {
+    display: block;
+    width: 310px;
+    border: 2px solid silver;
+    padding: 8px 10px;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+.labels input {
+    display: block;
+    width: 100%;
+    border: none;
+    background: transparent;
+    margin-top: 10px;
+    outline: none;
+}
+
+.labels span {
+    color: silver;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
+
+.labels span {
+    left: 2px;
+    top: -4px;
+}
+
+.subtitulo {
+    font-weight: 300;
+}
+
+.titulo {
+    color: #05436f
+}
+
+.btn-ingresar {
+    background-color: #05436f;
+    color: white;
+    padding: 5px 0 5px 0;
+    border: 1px solid black
+}
+
+.btn-registrar {
+    background-color: white;
+    color: black;
+    padding: 5px 0 5px 0;
+    border: 1px solid black;
+}
+
+.card-max{
+    max-height: 100%;
+}

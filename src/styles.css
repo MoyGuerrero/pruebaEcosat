@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-ingresar {
+    background-color: #05436f;
+    color: white;
+    padding: 5px 0 5px 0;
+    border: 1px solid black
+}
+
+.border-card {
+    border-radius: 23px;
+}
+
+.critico {
+    width: 30px;
+    height: 30px;
+    background: red;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.moderado {
+    width: 30px;
+    height: 30px;
+    background: yellow;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.baja {
+    width: 30px;
+    height: 30px;
+    background: green;
+    border: 1px solid black;
+    border-radius: 50%;
+}

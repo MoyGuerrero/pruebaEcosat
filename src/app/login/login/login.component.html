@@ -1,0 +1,48 @@
+<section class="body-login">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card size-card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h1 class="titulo"> {{'chamberlain group' | uppercase}} </h1>
+                    <h3 class="mt-3 subtitulo">Bienvenido</h3>
+                </div>
+                <form autocomplete="off" [formGroup]="login" (ngSubmit)="iniciar_sesion()">
+                    <div>
+                        <label class="labels">
+                            <span class="tamaño">Direccion de correo</span>
+                            <input type="text" class="tamaño" formControlName="usuario"
+                                placeholder="Pablo_Picasso@ecosat.com.mx">
+                        </label>
+                        <span *ngIf=" validarCampo('usuario')" class="form-text text-danger text-center">El correo es
+                            requerido</span>
+                    </div>
+                    <div class="mt-1">
+                        <label class="labels">
+                            <span class="tamaño">Password</span>
+                            <input type="password" class="tamaño" formControlName="password">
+                        </label>
+                        <span *ngIf=" validarCampo('password')" class="form-text text-danger text-center">El campo
+                            contraseña es requerido</span>
+                    </div>
+                    <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault"
+                            formControlName="rusuario">
+                        <label class="form-check-label recuerdame" for="flexCheckDefault">
+                            Recordar usuario
+                        </label>
+                    </div>
+                    <span class="form-text text-danger text-center w-100" *ngIf="!mostrarError"> Usuario y/o contraseña son incorrectas
+                    </span>
+                    <div class="row mt-5">
+                        <div class="col-6">
+                            <button class="w-100 btn-ingresar" [disabled]="login.invalid">Ingresar</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="w-100 btn-registrar">Registrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
