@@ -1,12 +1,9 @@
-
-
-
-export class Usuario {
+export class Zona {
     constructor(
+
         public id: number,
         public nombre: string,
-        public nickname: string,
-        public activo?: number
+        public activo: boolean
     ) {
 
     }

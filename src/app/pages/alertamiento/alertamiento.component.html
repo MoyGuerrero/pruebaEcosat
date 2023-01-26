@@ -5,18 +5,21 @@
             <div>
                 <select class="form-control">
                     <option value="0">Ubicacion</option>
+                    <option *ngFor="let u of ubicacion" [value]="u.nombre"> {{u.nombre}} </option>
                 </select>
             </div>
             &nbsp;
             <div>
                 <select class="form-control">
-                    <option value="0">Zona</option>
+                    <option value="">Zona</option>
+                    <option *ngFor="let z of zona3" [value]="z.nombre"> {{z.nombre}}</option>
                 </select>
             </div>
             &nbsp;
             <div>
                 <select class="form-control">
-                    <option value="0">Sensor</option>
+                    <option value="">Sensor</option>
+                    <option *ngFor="let s of sensor" [value]="s.nombre"> {{s.nombre}} </option>
                 </select>
             </div>
         </div>
@@ -66,23 +69,24 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>Ubicacion</th>
                                     <th>Sensor</th>
                                     <th>Fecha</th>
                                     <th>Hora</th>
-                                    <th colspan="2">Tiempo Transcurrido</th>
+                                    <th>Tiempo Transcurrido</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let d of datos">
+                                <tr *ngFor="let d of tabla"
+                                    (click)="llenarDatos(d)">
                                     <td>{{d.Ubicacion}}</td>
                                     <td>{{d.Sensor}}</td>
-                                    <td>{{d.Fecha}}</td>
-                                    <td>{{d.Hora}}</td>
-                                    <td>{{d.Tiempo}}</td>
+                                    <td>{{d.fecha | fecha}}</td>
+                                    <td>{{d.hora}}</td>
+                                    <td>{{d.tiempo}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -97,7 +101,10 @@
                 <div class="card border-card ">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <span> {{zona}} </span>
+                                <span> {{zona1}} </span>
+                            </div>
                             <div class="col-6 text-end">
                                 <span>Temperatura</span> <br>
                                 <span>Actual</span>
@@ -107,31 +114,59 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3">
-                <div class="card border-card ">
+        <div class="d-flex justify-content-between">
+            <div>
+                <div class="card border-card">
                     <div class="card-body">
+                        <div class="top_ tamañoletra">
+                            Estado
+                        </div>
+
+
+                        <div class="tamañoletra"> {{texto}} </div>
+
+
+                        <div class="bottom tamañoletra">
+                            <span>Tiempo<br>Inactivo</span> <span class="pipeT"> |</span> <span> {{tiempo}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card border-card">
+                    <div class="card-body">
+                        <div class="top_ tamañoletra">
+                            Temperatura
+                        </div>
+
+
+                        <div class="tamañoletra"> {{temperaturaActual}} </div>
 
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card border-card ">
+            <div>
+                <div class="card border-card">
                     <div class="card-body">
+                        <div class="top_ tamañoletra">
+                            Origen
+                        </div>
+
+
+                        <div class="tamañoletra"> {{Origen}} </div>
 
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card border-card ">
+            <div>
+                <div class="card border-card">
                     <div class="card-body">
+                        <div class="top_ tamañoletra">
+                            Registro de accidente
+                        </div>
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card border-card ">
-                    <div class="card-body">
+
+                        <div class="tamañoletra"> {{registro}} </div>
 
                     </div>
                 </div>

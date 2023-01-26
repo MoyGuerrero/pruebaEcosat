@@ -1,0 +1,16 @@
+.top_ {
+    top: 0%;
+    color: blue;
+}
+
+.bottom {
+    top: 100%;
+}
+
+.pipeT {
+    height: 50%;
+}
+
+.tamañoletra {
+    font-size: 13px;
+}

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
+import { Router } from '@angular/router';
+
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -12,24 +15,32 @@ export class LoginComponent implements OnInit {
   public mostrarError: boolean = true;
 
   public login = this.fb.group({
-    usuario: ['', Validators.required],
+    nickname: ['', Validators.required],
     password: ['', Validators.required],
     rusuario: [false, Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private us: UsuarioService) { }
+  constructor(private fb: FormBuilder, private us: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
+    const nickname = localStorage.getItem('nickname')
 
+    console.log(nickname);
+
+    if (nickname != null) {
+      this.login.get('rusuario')?.setValue(true);
+      this.login.get('nickname')?.setValue(nickname);
+    }
   }
 
   iniciar_sesion() {
-    if (this.us.login(this.login.value) == undefined) {
-      this.mostrarError = true;
-      return
-    }
-    this.us.login(this.login.value);
-
+    this.us.login(this.login.value).subscribe({
+      next: res => this.router.navigateByUrl('/principal'),
+      error: err => {
+        console.error(err);
+        Swal.fire('Error', err.error.msg, 'warning')
+      }
+    });
   }
 
   validarCampo(campo: string) {

@@ -6,15 +6,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AlertamientoComponent } from './alertamiento/alertamiento.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-
-
+import { FechaPipe } from '../pipes/fecha.pipe';
+import { PalabraBuscadaPipe } from '../pipes/palabra-buscada.pipe';
 
 @NgModule({
   declarations: [
     PagesComponent,
     NopagefountComponent,
     DashboardComponent,
-    AlertamientoComponent
+    AlertamientoComponent,
+    FechaPipe,
+    PalabraBuscadaPipe
   ],
   imports: [
     CommonModule,

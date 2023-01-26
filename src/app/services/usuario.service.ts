@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { catchError, map, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+const base_url = environment.base_url
 
 @Injectable({
   providedIn: 'root'
@@ -9,31 +15,46 @@ export class UsuarioService {
 
   public usuario2!: Usuario;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
-  verificarToken() {
-    let token = localStorage.getItem('token');
-    if (token == null) {
-      return false
-    } else {
-      this.usuario2 = new Usuario("root", "root", "Moises Guerrero");
-      return true;
+
+
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token
+      }
     }
   }
 
+  verificarToken() {
+    return this.http.get(`${base_url}/usuario/renovar_token`, this.headers).pipe(
+      tap((resp: any) => {
+        const resultados = resp.result[0];
+        const { id, nombre, nickname, activo } = resultados;
+
+        this.usuario2 = new Usuario(id, nombre, nickname, activo)
+        localStorage.setItem('token', resp.token)
+      }),
+      map(resp => true),
+      catchError(err => of(false))
+    );
+  }
 
   login(datos: any) {
-    let usuario = 'root';
-    let pass = 'root';
-    if (datos.usuario == usuario && datos.password == pass) {
-      localStorage.setItem('token', '123456789');
-      this.usuario2 = new Usuario(datos.usuario, datos.password, "Moises Guerrero");
 
-      console.log(this.usuario2);
-      this.router.navigateByUrl('/principal');
-      return this.usuario2;
-    } else {
-      return "Usuario y/o contraseñas incorrecta"
+    if (datos.rusuario) {
+      localStorage.setItem('nickname', datos.nickname);
+    }else{
+      localStorage.removeItem('nickname');
     }
+    return this.http.post(`${base_url}/usuario/login`, datos).pipe(
+
+      tap((resp: any) => localStorage.setItem('token', resp.token))
+    )
   }
 }

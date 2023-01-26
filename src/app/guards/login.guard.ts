@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,13 @@ export class LoginGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-    console.log(this.usuarioServices.verificarToken())
-
-    if (this.usuarioServices.verificarToken() == false) {
-      this.router.navigateByUrl('/login');
-      return false;
-    } else {
-      return this.usuarioServices.verificarToken()
-    }
+    return this.usuarioServices.verificarToken().pipe(
+      tap(autenticado => {
+        if (!autenticado) {
+          this.router.navigateByUrl('/login');
+        }
+      })
+    )
   }
 
 }
